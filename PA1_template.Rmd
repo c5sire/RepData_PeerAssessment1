@@ -1,17 +1,42 @@
 # Reproducible Research: Peer Assessment 1
 
-
 ## Loading and preprocessing the data
+```{r}
+unzip("activity.zip")
+
+dat =read.csv("activity.csv")
+dat$date <- as.Date(dat$date)
+
+stepsByDay = aggregate(steps ~date, data=dat, sum)
+stepsByInt = aggregate(steps ~interval, data=dat, mean)
+```
 
 
 
 ## What is mean total number of steps taken per day?
+```{r}
+hist(stepsByDay$steps)
+```
 
-
+```{r}
+mns = mean(stepsByDay$steps)
+mds = median(stepsByDay$steps)
+```
+The mean total number of steps per day is `r mns`; the median number of steps is `r mds`.
 
 ## What is the average daily activity pattern?
 
+1. Time series plot
+```{r }
+plot(steps~interval, dat=stepsByInt, type="l")
+```
 
+2. Which 5-min interval contains the maximum number of steps?
+```{r echo=TRUE}
+maxInt= stepsByInt[which(max(stepsByInt[,2])==stepsByInt[,2]),]
+```
+
+The maximum number of steps is taken during the interval # `r maxInt[1]`.
 
 ## Imputing missing values
 
