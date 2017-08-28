@@ -19,8 +19,8 @@ hist(stepsByDay$steps, main="Mean number of steps per day")
 ```
 
 ```{r}
-mns = mean(stepsByDay$steps)
-mds = median(stepsByDay$steps)
+mns = mean(stepsByDay$steps, na.rm = TRUE)
+mds = median(stepsByDay$steps, na.rm = TRUE)
 ```
 The mean total number of steps per day is `r mns`; the median number of steps is `r mds`.
 
